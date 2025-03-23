@@ -1,30 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registry of Useful Things | Home</title>
-</head>
-<body>
+<!--gets output where the slot variable is in layout.blade.php-->
+
+<x-layout>
     <h2>Currently Available Products</h2>
+
     <p>{{ $greeting }}</p>
 
     <ul>
-        <li>
-            <a href="/registry/{{$products[0]["id"]}}">
-                {{ $products[0]["name"] }}
-            </a>
-        </li>
+        @foreach($products as $product)
+            <li>
+                <x-card href="/registry/{{ $product['id'] }}" :highlight="$product['price'] > 50">
+                    <h3>{{ $product['name'] }}</h3>
+                </x-card>
+            </li>        
+        @endforeach
     </ul>
-    
-    <ul>
-        <li>
-            <a href="/registry/{{$products[1]["id"]}}">
-                {{ $products[1]["name"] }}
-            </a>
-        </li>
-    </ul>
-
-</body>
-</html>
+</x-layout>
